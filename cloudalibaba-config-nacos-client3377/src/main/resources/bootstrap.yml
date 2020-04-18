@@ -1,0 +1,14 @@
+server:
+  port: 3377
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ubuntu-server:8848 #Nacos服务注册中心地址
+      config:
+        server-addr: ubuntu-server:8848 #Nacos作为配置中心地址
+        file-extension: yml  #指定yaml格式的配置
+        group: DEV_GROUP
+#        namespace: 85e8d396-8bd5-4b0d-8a38-538dc1587998

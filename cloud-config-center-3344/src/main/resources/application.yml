@@ -1,0 +1,36 @@
+server:
+  port: 3344 # 修改host 添加: 127.0.0.1 config-3344.com
+
+spring:
+  application:
+    name: cloud-config-center
+  #rabbit相关配置
+  rabbitmq:
+    host: ubuntu-server  # 这里为虚拟机安装的 rabbitmq 地址
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Demogorgon314/springcloud-config.git #github仓库上面的git仓库名字
+          ##搜索目录
+          search-paths:
+            - cloud-config
+      #读取分支
+      label: master
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+
+
+
+#rabbitmq相关配置，暴露bus刷新配置的端点
+management:
+  endpoints:  #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'  #凡是暴露监控、刷新的都要有actuator依赖，bus-refresh就是actuator的刷新操作
